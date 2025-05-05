@@ -1,18 +1,3 @@
-1.SELECT DISTINCT Madi, Msoyadi
-FROM Musteri
-JOIN Satis ON Musteri.Mno = Satis.Mno;
-
-2.SELECT Musteri.Madi, Musteri.Msoyadi, Arac.Marka, Arac.Model
-FROM Alim
-JOIN Musteri ON Alim.Mno = Musteri.Mno
-JOIN Arac ON Alim.Aracno = Arac.Aracno;
-
-
-3.SELECT Musteri.Madi, Musteri.Msoyadi, COUNT(Alim.Aracno) AS Arac_Sayisi
-FROM Alim
-JOIN Musteri ON Alim.Mno = Musteri.Mno
-GROUP BY Musteri.Madi, Musteri.Msoyadi;
-
 
 4.SELECT DISTINCT Arac.Marka, Arac.Model
 FROM Satis
@@ -32,25 +17,6 @@ WHERE Aracno NOT IN (SELECT Aracno FROM Satis);
 FROM Satis
 JOIN Arac ON Satis.Aracno = Arac.Aracno
 GROUP BY Arac.Aracno, Arac.Marka, Arac.Model;
-
-
-8.SELECT 
-    A.Aracno,
-    A.Marka,
-    A.Model,
-    COALESCE(AlimSayisi.Say, 0) AS Alim_Sayisi,
-    COALESCE(SatisSayisi.Say, 0) AS Satis_Sayisi
-FROM Arac A
-LEFT JOIN (
-    SELECT Aracno, COUNT(*) AS Say
-    FROM Alim
-    GROUP BY Aracno
-) AS AlimSayisi ON A.Aracno = AlimSayisi.Aracno
-LEFT JOIN (
-    SELECT Aracno, COUNT(*) AS Say
-    FROM Satis
-    GROUP BY Aracno
-) AS SatisSayisi ON A.Aracno = SatisSayisi.Aracno;
 
 
 9.SELECT Musteri.Madi, Musteri.Msoyadi, Arac.Marka, Arac.Model, Satis.Sfiyat
