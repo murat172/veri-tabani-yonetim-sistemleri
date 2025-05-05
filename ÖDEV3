@@ -6,7 +6,7 @@ JOIN Arac ON Satis.Aracno = Arac.Aracno;
 FROM Arac
 WHERE Aracno NOT IN (SELECT Aracno FROM Satis);
 
-6.SELECT Arac.Aracno, Arac.Marka, Arac.Model, AVG(Satis.Sfiyat) AS Ortalama_Satis
+7.SELECT Arac.Aracno, Arac.Marka, Arac.Model, AVG(Satis.Sfiyat) AS Ortalama_Satis
 FROM Satis
 JOIN Arac ON Satis.Aracno = Arac.Aracno
 GROUP BY Arac.Aracno, Arac.Marka, Arac.Model;
