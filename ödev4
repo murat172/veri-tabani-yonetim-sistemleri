@@ -3,7 +3,7 @@ SELECT DISTINCT m.Madi, m.Msoyadi, 'Satış' AS Islem
 FROM Satış s
 JOIN Araç a ON s.Aracno = a.Araçno
 JOIN Müşteri m ON s.Mno = m.Mno
-WHERE a.Marka LIKE 'Opel%'
+WHERE a.Marka LIKE 'mercedes%'
 
 UNION
 
@@ -12,7 +12,7 @@ SELECT DISTINCT m.Madi, m.Msoyadi, 'Alım' AS Islem
 FROM Alım al
 JOIN Araç a ON al.Aracno = a.Araçno
 JOIN Müşteri m ON al.Mno = m.Mno
-WHERE a.Marka LIKE 'Opel%';
+WHERE a.Marka LIKE 'fiat%';
 
 SELECT a.Araçno, a.Marka, a.Fiyat AS AracFiyati, s.Sfiyat AS SatisFiyati
 FROM Araç a
