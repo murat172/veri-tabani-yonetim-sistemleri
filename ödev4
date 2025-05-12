@@ -3,7 +3,7 @@ SELECT DISTINCT m.Madi, m.Msoyadi, 'Satış' AS Islem
 FROM Satış s
 JOIN Araç a ON s.Aracno = a.Araçno
 JOIN Müşteri m ON s.Mno = m.Mno
-WHERE a.Marka LIKE 'mercedes%'
+WHERE a.Marka LIKE 'opel%'
 
 UNION
 
