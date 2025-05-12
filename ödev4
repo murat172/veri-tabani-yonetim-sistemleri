@@ -1,0 +1,51 @@
+-- Satışlar
+SELECT DISTINCT m.Madi, m.Msoyadi, 'Satış' AS Islem
+FROM Satış s
+JOIN Araç a ON s.Aracno = a.Araçno
+JOIN Müşteri m ON s.Mno = m.Mno
+WHERE a.Marka LIKE 'Opel%'
+
+UNION
+
+-- Alımlar
+SELECT DISTINCT m.Madi, m.Msoyadi, 'Alım' AS Islem
+FROM Alım al
+JOIN Araç a ON al.Aracno = a.Araçno
+JOIN Müşteri m ON al.Mno = m.Mno
+WHERE a.Marka LIKE 'Opel%';
+
+SELECT a.Araçno, a.Marka, a.Fiyat AS AracFiyati, s.Sfiyat AS SatisFiyati
+FROM Araç a
+JOIN Satış s ON a.Araçno = s.Aracno
+WHERE a.Fiyat > 20000;
+
+
+SELECT m.Madres, SUM(s.Sfiyat) AS ToplamSatis
+FROM Satış s
+JOIN Müşteri m ON s.Mno = m.Mno
+WHERE m.Madres LIKE '%Turhal%' OR m.Madres LIKE '%Amasya%'
+GROUP BY m.Madres
+ORDER BY ToplamSatis DESC;
+
+
+SELECT *
+FROM Müşteri
+WHERE Mno NOT IN (SELECT Mno FROM Satış)
+  AND Mno NOT IN (SELECT Mno FROM Alım);
+
+
+SELECT m.Madi, m.Msoyadi, s.Sat_tarih
+FROM Satış s
+JOIN Müşteri m ON s.Mno = m.Mno
+WHERE MONTH(STR_TO_DATE(s.Sat_tarih, '%d.%m.%Y')) IN (5, 6);
+
+
+
+SELECT m.Madi, m.Msoyadi, a.Marka
+FROM Alım al
+JOIN Araç a ON al.Aracno = a.Araçno
+JOIN Müşteri m ON al.Mno = m.Mno
+GROUP BY m.Madi, m.Msoyadi, a.Marka
+HAVING COUNT(*) > 1;
+
+
